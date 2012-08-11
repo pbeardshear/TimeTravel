@@ -26,7 +26,7 @@ Page = (function() {
 	function newFileUploaded() {
 		document.getElementById('list');
 		var template = '<div class="fileImage">{0}</div>';
-		var 
+		
 	}
 
 	return {
