@@ -2,16 +2,11 @@
 <head>
 	<script type="text/javascript" src="http://localhost:3000/socket.io/socket.io.js"></script>
 	<script>
-		var socket = io.connect('http://localhost:3000');
-		socket.send('file', { data: File });
-		socket.on('fileBroadcast', function (data) {
-			showFileOnClient(data);
-		});
-		
-		
+		var socket = io.connect('http://localhost:3000/');
+		socket.emit('test', 'data');
 	</script>
 </head>
 <body>
-	
+	<p>Hello world!</p>
 </body>
 </html>
