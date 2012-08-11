@@ -1,12 +1,41 @@
 <!DOCTYPE html>
 <head>
-	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
-	<script>
-		var socket = io.connect();
-		socket.emit('test', 'data');
-	</script>
+	<script type="text/javascript" src="http://localhost:3000/socket.io/socket.io.js"></script>
+	<script type="text/javascript" src="dragdrop.js"></script>
+	<link type="stylesheet" type="text/css" href="dragdrop.css" />
+	<style>
+		#drop
+		{
+			width: 500px;
+			height: 500px;
+			border: 1px solid black;
+			margin: auto;
+		}	
+		#list
+		{
+			width: 1000px;
+			height: 500px;
+			border: 1px solid black;
+			margin: auto;
+		}
+		#status
+		{
+			width: 1000px;
+			height: 200px;
+			border: 1px solid black;
+			margin: auto;
+		}
+	</style>
 </head>
 <body>
-	<p>Hello world!</p>
+	<div id="drop">
+	
+	</div>
+	<div id="status">
+	
+	</div>
+	<div id="list">
+	
+	</div>
 </body>
 </html>
