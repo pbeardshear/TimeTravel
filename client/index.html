@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<head>
+	<script type="text/javascript" src="http://localhost:3000/socket.io/socket.io.js"></script>
+	<script>
+		var socket = io.connect('http://localhost:3000');
+		socket.send('file', { data: File });
+		socket.on('fileBroadcast', function (data) {
+			showFileOnClient(data);
+		});
+		
+		
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
