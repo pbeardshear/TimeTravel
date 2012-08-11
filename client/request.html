@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<head>
+	<!-- Main include on all pages -->
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+	<!-- End include -->
+	<script type="text/javascript">
+		var socket = io.connect();
+		
+		socket.on('response', function (data) {
+			if (data.success) {
+				switch (data.action) {
+					case 'redirect':
+						window.location.href = data.location;
+						break;
+					default:
+						break;
+				}
+			}
+		});
+		
+		window.addEventListener('load', function () {
+			document.getElementById('request').addEventListener('click', function () {
+				socket.emit('register');
+			});
+		});
+	</script>
+</head>
+<body>
+	<button id="request">Request Server</button>
+</body>
+</html>
