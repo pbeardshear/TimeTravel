@@ -22,9 +22,21 @@ Page = (function() {
 		  handler.apply(this, boundParameters);
 	  }
 	};
+	
+	function newFileUploaded() {
+		document.getElementById('list');
+		var template = '<div class="fileImage">{0}</div>';
+		var 
+	}
 
 	return {
 		init: function() {
+			  var socket = io.connect('http://localhost');
+			  socket.on('news', function (data) {
+				console.log(data);
+				socket.emit('my other event', { my: 'data' });
+			  });
+			
 			var status = document.getElementById('status');
 			var drop   = document.getElementById('drop');
 			var list   = document.getElementById('list');
@@ -71,7 +83,7 @@ Page = (function() {
 								 // ? 'Loaded 100% of file '+fileNumber+' of '+files.length+'...' 
 								 // : 'Done loading. processed '+fileNumber+' files.';
 				status.innerHTML = bin;
-
+				socket.emit('broadcast', {data: bin});
 				var img = document.createElement("img"); 
 				img.file = file;   
 				img.src = bin;
@@ -80,6 +92,7 @@ Page = (function() {
 			
 			  return false;
 			});
+			
 			
 
 		}
