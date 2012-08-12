@@ -30,17 +30,13 @@ Page = (function() {
 			console.log('enter');
 			$("#" + id).html("Drop to upload").css({
 				//circle expansion here
-				Ext.create('Ext.fx.Anim', {
-				
-				});
+	
 			});
 		},
 		dragLeave: function() {
 			$("#" + id).html("Drop files here").css({
 				//circle unexpansion here
-				Ext.create('Ext.fx.Anim', {
-				
-				});
+
 			});
 		},
 		progress: function(percentage) {
@@ -54,38 +50,35 @@ Page = (function() {
 	});
 	}
 	
+	function createUserTooltip(id) {
+		function getMemberUsers() {
+			var users = Page.Manager.setActiveGroup(id);
+			
+		}
+	
+		var config = {
+			content: getMemberUsers()
+		};
+		$('#status').tipTip(config); 
+	}
+	
+	function createSendTextFileTooltip() {
+	
+	}
+	
 	return {
+		createUserTooltip: createUserTooltip,
+		attachFilepicker: attachFilepicker,
 		init: function() {
-			  filepicker.setKey('AjB_5ggM9QMO_uSoMgHNmz');
-				  filepicker.makeDropPane($('#drop')[0], {
-					dragEnter: function() {
-						console.log('enter');
-						$("#drop").html("Drop to upload").css({
-							'backgroundColor': "#E0E0E0",
-							'border': "1px solid #000"
-						});
-					},
-					dragLeave: function() {
-						$("#drop").html("Drop files here").css({
-							'backgroundColor': "#F6F6F6",
-							'border': "1px dashed #666"
-						});
-					},
-					progress: function(percentage) {
-						$("#drop").text("Uploading ("+percentage+"%)");
-					},
-					done: function(data) {
-						$("#status").text(JSON.stringify(data[0].url));
-						socket.emit('broadcast', { name: data[0].data.filename, size: data[0].data.size, fileType: data[0].data.type, type: 'file', url: data[0].url });
-					}
-				});
-				
-				
+			filepicker.setKey('AjB_5ggM9QMO_uSoMgHNmz');
+					
 			window.addEventListener("keypress", newFileUploaded);
 			socket.on('response', newFileUploaded);
 			var status = document.getElementById('status');
 			var drop   = document.getElementById('drop');
 			var list   = document.getElementById('list');
+			
+			createUserTooltip();	
 		}
 	};
 })();
