@@ -1,9 +1,8 @@
 Page = (function() {
-
 	function newFileUploaded(data) {
 		data = data.data;
 		
-		if (data.users) {
+		if (data && data.users) {
 			var name;
 			var list = document.getElementById('list');
 			var newEl = document.createElement('a');
@@ -23,10 +22,38 @@ Page = (function() {
 		else {
 			//user alerting crap
 		}
-		
-
 	}
 
+	function attachFilepicker(id) {
+		filepicker.makeDropPane($('#' + id)[0], {
+		dragEnter: function() {
+			console.log('enter');
+			$("#" + id).html("Drop to upload").css({
+				//circle expansion here
+				Ext.create('Ext.fx.Anim', {
+				
+				});
+			});
+		},
+		dragLeave: function() {
+			$("#" + id).html("Drop files here").css({
+				//circle unexpansion here
+				Ext.create('Ext.fx.Anim', {
+				
+				});
+			});
+		},
+		progress: function(percentage) {
+			$("#" + id).text(percentage+ "%");
+			
+		},
+		done: function(data) {
+			$("#status").text(JSON.stringify(data[0].url));
+			socket.emit('broadcast', { name: data[0].data.filename, size: data[0].data.size, fileType: data[0].data.type, type: 'file', url: data[0].url });
+		}
+	});
+	}
+	
 	return {
 		init: function() {
 			  filepicker.setKey('AjB_5ggM9QMO_uSoMgHNmz');
@@ -52,6 +79,8 @@ Page = (function() {
 						socket.emit('broadcast', { name: data[0].data.filename, size: data[0].data.size, fileType: data[0].data.type, type: 'file', url: data[0].url });
 					}
 				});
+				
+				
 			window.addEventListener("keypress", newFileUploaded);
 			socket.on('response', newFileUploaded);
 			var status = document.getElementById('status');
