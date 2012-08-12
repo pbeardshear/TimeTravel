@@ -1,23 +1,26 @@
 Page = (function() {
-	function newFileUploaded(data) {
+	var sender;
+	function newData(data) {
 		data = data.data;
-		
+		console.log(data);
 		if (data && data.users) {
-			var name;
-			var list = document.getElementById('list');
-			var newEl = document.createElement('a');
-			newEl.href = data.url;
+			// new Page.DataItem(data.name
+		
+			// var name;
+			// var list = document.getElementById('list');
+			// var newEl = document.createElement('a');
+			// newEl.href = data.url;
 			
-			var imgEl = document.createElement('img');
-			imgEl.src = "http://1.bp.blogspot.com/-ivx8sPkrN0E/T7oWeBCAwKI/AAAAAAAAAfw/aZoBDKIIB3o/s1600/File.png";
+			// var imgEl = document.createElement('img');
+			// imgEl.src = "http://1.bp.blogspot.com/-ivx8sPkrN0E/T7oWeBCAwKI/AAAAAAAAAfw/aZoBDKIIB3o/s1600/File.png";
 			
-			var fileInfo = document.createElement('p');
-			fileInfo.innerHTML = 'File Name: ' + data.name + '<br>' + 'File Size: ' + data.size + '<br>' + 'File Type: ' + data.fileType;
+			// var fileInfo = document.createElement('p');
+			// fileInfo.innerHTML = 'File Name: ' + data.name + '<br>' + 'File Size: ' + data.size + '<br>' + 'File Type: ' + data.fileType;
 			
-			newEl.appendChild(imgEl);
-			newEl.appendChild(fileInfo);
+			// newEl.appendChild(imgEl);
+			// newEl.appendChild(fileInfo);
 			
-			list.appendChild(newEl);
+			// list.appendChild(newEl);
 		}
 		else {
 			//user alerting crap
@@ -47,9 +50,17 @@ Page = (function() {
 		done: function(data) {
 			var loadingText = $('#' + id + ' .loadingText');
 			setTimeout(function () { loadingText.fadeOut(300); }, 500);
-			socket.emit('broadcast', { name: data[0].data.filename, size: data[0].data.size, fileType: data[0].data.type, type: 'file', url: data[0].url });
+			socket.emit('broadcast', { sender: sender, name: data[0].data.filename, size: data[0].data.size, fileType: data[0].data.type, type: 'file', url: data[0].url });
 		}
 	});
+	}
+	
+	function setName() {
+		if (event.charCode == 13) {
+			name = $('#name').value;
+			console.log(13);
+			$('#maskInput').hide();
+		}
 	}
 	
 	function createUserTooltip(id) {
@@ -57,18 +68,25 @@ Page = (function() {
 		$('#' + id).tipTip(config); 
 	}
 	
-	function createSendTextFileTooltip() {
-	
+	function createSendTextFileTooltip(field, event) {
+
 	}
 	
 	return {
+		sender: sender,
 		createUserTooltip: createUserTooltip,
 		attachFilepicker: attachFilepicker,
+		setName: setName,
 		init: function() {
+			var maskInput = document.createElement('div');
+			maskInput.id = 'maskInput';
+			maskInput.innerHTML = 'Welcome to your room! What\'s your name?<textarea id="name" onkeypress="Page.setName(this, event)"></textarea>';
+			document.body.appendChild(maskInput);
+			
 			filepicker.setKey('AjB_5ggM9QMO_uSoMgHNmz');
 					
-			window.addEventListener("keypress", newFileUploaded);
-			socket.on('response', newFileUploaded);
+			window.addEventListener("keypress", newData);
+			socket.on('response', newData);
 			var status = document.getElementById('status');
 			var drop   = document.getElementById('drop');
 			var list   = document.getElementById('list');
