@@ -1,21 +1,21 @@
 body { margin: 0px; font-family: arial;}
-#drop
-{ width: 48%; height: 375px; color: gray; font-size: 3em; font-family: arial; text-align: center; vertical-align: middle; float: left; }	
+#drop { width: 48%; height: 375px; color: gray; font-size: 3em; font-family: arial; text-align: center; vertical-align: middle; float: left; }	
+#logo { margin-left: 30px; }
 #list { float: left; width: 48%; height: 375px; border: 1px solid black; }
 #list a img, #list a p { font-family: helvetica; font-size: 14px; float: left; color: gray; }
 #drop, #list { margin-top: 45px; border: 3px dashed rgba(102, 102, 102, 0.24); border-radius: 10px; }
 #status { width: 1000px; height: 200px; border: 1px solid black; margin: auto; float: left; }
-img { height: 20px; }
+.dataItem img { height: 20px; }
 #droptext { width: 100%; height: 100%; }
 
 #circleArea { width: 60%; height: 100%; margin: 0px auto; padding: 15px; }
-#fileList { left: 0px; border-right: 1px solid #CCC; }
-#userList { right: 0px; border-left: 1px solid #CCC; }
+#fileList { left: 0px; }
+#userList { right: 0px; }
 .sidebar { width: 20%; height: 100%; position: absolute; background-image: url(http://s.ytimg.com/yt/imgbin/www-refreshbg-vflC3wnbM.png); z-index: 10; top: 0px; padding-top: 62px; }
 .floating { position: absolute; }
-#addCircle { top: 0px; right: 20%; border: 1px solid #CCC; border-top: none; border-right: none; padding: 10px; margin-top: 60px; }
+#addCircle { top: 0px; right: 20%; border: 1px solid #CCC; border-top: none; border-right: none; padding: 10px; margin-top: 60px; background-color: #FFF; opacity: 0.5; }
 #options { bottom: 0px; left: 0px; }
-.sidebar { box-shadow: 0px 0px 22px 6px #CCC;}
+.sidebar { box-shadow: 0px 0px 6px #333; }
 
 
 
@@ -42,20 +42,20 @@ img { height: 20px; }
 
 #maskInput { position: fixed; top: 45%; z-index: 5000; width: 100%; height: 300px; background-color: #026A8B }
 
-.group { height: 150px; width: 150px; position: relative; }
+.group { height: 150px; width: 150px; display: inline-block; }
 .group .groupName { font-size: 12px; font-family: Verdana, sans-serif; margin: 10px 0; color: #FFF; font-weight: 500; }
 .group .groupName { width: 60px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.red .circle { background-color: #EA0037; }
-.blue .circle { background-color: #348DCE; }
-.green .circle { background-color: #007C21; }
-.yellow .circle { background-color: #FFA400; }
-.orange .circle { background-color: #FF8740; }
-.purple .circle { background-color: #8742D6; }
-.pink .circle { background-color: #C10087; }
-.outerCircle { background: url('/images/BubblesBubble.png') no-repeat center center; background-size: 110px; height: 117px; width: 150px; -webkit-transition: background-size 100ms linear; padding-top: 35px; }
-.outerCircle:hover { -webkit-transition: background-size 100ms linear; background-size: 140px; }
-.circle { height: 57px; width: 57px; margin: 0px 34px; background-color: #348DCE; border-radius: 50%; padding: 13px; }
-.circle { -moz-box-shadow: inset 0 0 5px #333; -webkit-box-shadow: inset 0 0 5px #333; box-shadow: inner 0 0 5px #333; }
+.red .groupName { color: #EA0037; }
+.blue .groupName { color: #348DCE; }
+.green .groupName { color: #007C21; }
+.yellow .groupName { color: #FFA400; }
+.orange .groupName { color: #FF8740; }
+.purple .groupName { color: #8742D6; }
+.pink .groupName { color: #C10087; }
+.outerCircle { background: url('/images/BubblesBubble.png') no-repeat center center; background-size: 140px; height: 117px; width: 150px; -webkit-transition: background-size 100ms linear; padding-top: 35px; }
+.outerCircle:hover { -webkit-transition: background-size 100ms linear; background-size: 180px; }
+.circle { height: 57px; width: 57px; margin: 0px 34px; background-color: transparent; border-radius: 50%; padding: 13px; }
+/*.circle { -moz-box-shadow: inset 0 0 5px #333; -webkit-box-shadow: inset 0 0 5px #333; box-shadow: inner 0 0 5px #333; }*/
 .loadingText { margin-left: 22px; color: #000; font-weight: bold; }
 .tipGroupName { font-size: 12px; font-weight: bold; color: #333; }
 /*
@@ -72,3 +72,4 @@ img { height: 20px; }
 /* Override tiptip styling */
 #tiptip_content { background: #FFF none !important; text-shadow: none !important; color: #000 !important; border: 1px solid #AAA !important; }
 #tiptip_holder.tip_right #tiptip_arrow_inner { border-right-color: #AAA !important; }
+#textMessage { font-family: Verdana, sans-serif; }

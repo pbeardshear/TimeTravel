@@ -79,7 +79,7 @@ Page = (function() {
 		$('#' + id).tipTip({ 
 			defaultPosition: 'bottom', 
 			activation: 'click', 
-			keepAlive: true
+			keepAlive: false
 		});
 	}
 	

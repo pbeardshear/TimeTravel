@@ -30,18 +30,63 @@ Page.Manager = (function () {
 		}
 	});
 	
+	function saveGroups() {
+		var serial = JSON.stringify(groups.map(function (g) { return { name: g.name, x: g.x, y: g.y, color: g.color, users: g.getUserNames() }; }));
+		// Save the user's groups in local storage
+		localStorage.setItem('__groups', serial);
+	}
+	
+	function createGroup(name, skipSave) {
+		var group;
+		if (name) {
+			groups.push(group = new Page.Group(name, row, column));
+			column = (column + 1) % columnCount;
+			if (column == 0) {
+				row += 1;
+			}
+			
+			if (!skipSave) {
+				saveGroups();
+			}
+			return group;
+		}
+	}
+	
 	function onload() {
 		// Run code that requires the dom
 		$('#createGroup').click(function () {
 			var groupName = $('#groupName').val();
-			if (groupName) {
-				groups.push(new Page.Group(groupName, row, column));
-				column = (column + 1) % columnCount;
-				if (column == 0) {
-					row += 1;
-				}
-			}
+			createGroup(groupName);
 		});
+		
+		$('#groupName').on('focus', function () {
+			$('#addCircle').css('opacity', '1.0');
+		});
+		$('#groupName').on('blur', function () {
+			$('#addCircle').css('opacity', '0.5');
+		});
+		
+		// Load the groups, if the user has any
+		var groups = localStorage.getItem('__groups'),
+			group;
+		if (groups) {
+			// Deserialize the object
+			groups = JSON.parse(groups);
+			for (var i = 0; i < groups.length; i++) {
+				group = createGroup(groups[i].name, true);
+				group.moveTo(groups[i].x, groups[i].y);
+				for (var j = 0; j < groups[i].users.length; j++) {
+					group.users.push(new Page.UserItem(groups[i].users[j].name, groups[i].users[j].active));
+				}
+				group.updateCount();
+			}
+		}
+		else {
+			createGroup('Everyone', true);
+		}
+		window.onbeforeunload = function () {
+			saveGroups();
+		};
 	}
 	
 	// Execute when DOM is ready

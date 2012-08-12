@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <head>
+	<title>BubbleRoom</title>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
 	<script type="text/javascript" src="/jquery.ui.core.js"></script>
 	<script type="text/javascript" src="/jquery.ui.widget.js"></script>
 	<script type="text/javascript" src="/jquery.ui.mouse.js"></script>
-	<script type="text/javascript" src="/jquery.ui.draggable.js"></script>
+	<script type="text/javascript" src="/jquery.ui.draggable.js"></script>	
 	<script type="text/javascript" src="/jquery.tipTip.minified.js"></script>	
 	<script type="text/javascript" src="https://api.filepicker.io/v0/filepicker.js"></script>
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
@@ -30,10 +31,6 @@
 		}
 		
 		$(function () {
-			new Page.Group('Everyone', 0, 0);
-			new Page.Group('Development', 0, 1);
-			new Page.Group('Out of Office', 0, 2);
-			
 			new Page.UserItem('Poop McGee', true);
 			new Page.DataItem('Bryan Chuchu', { type: 'file', url: 'http://www.google.com', fileName: 'myawesomefile.js' });
 			new Page.DataItem('Peter B.', { type: 'text', data: 'What is up guys?' });
@@ -55,7 +52,7 @@
 	
 	</div>
 	-->
-	<div id="header"></div>
+	<div id="header"><img src="/images/BubblesLogo.png" height="60" id="logo" /></div>
 	<div id="container">
 		<div class="sidebar" id="fileList">
 		</div>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <head>
+	<title>Bubbles</title>
 	<!-- Main include on all pages -->
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 	<script type="text/javascript" src="/overrides.js"></script>
@@ -17,10 +18,11 @@
 		html, body { background-image: url(http://s.ytimg.com/yt/imgbin/www-refreshbg-vflC3wnbM.png); height: 100%; width: 100%; }
 		#container { width: 400px; margin: 150px auto; }
 		#request { width: 400px; height: 120px; font-size: 40px; font-family: Verdana, sans-serif; }
+		#logo { margin-left: 30px; }
 	</style>
 </head>
 <body>
-	<div id="header"></div>
+	<div id="header"><img src="/images/BubblesLogo.png" height="60" id="logo" /></div>
 	<div id="container">
 		<button id="request">Request Server</button>
 	</div>

@@ -19,7 +19,6 @@
 				'<div class="inline wrapper">',
 					'<div class="user">{user}:</div>',
 					'<div class="userData">{data}</div>',
-					'<div class="size">{size} bytes</div>',
 				'</div>',
 			'</div>',
 			'<div class="separator"></div>'
@@ -105,7 +104,7 @@
 		this.size = data.size;
 		
 		if (data.type === 'file') {
-			this.data = '<a href="' + data.url + '">' + data.name + '</a>';
+			this.data = '<a href="' + data.url + '">' + data.fileName + '</a>';
 		}
 		
 		var html = dataTemplate.join('');
@@ -130,7 +129,6 @@
 		this.color = colors.splice(Math.floor(Math.random() * colors.length), 1);
 		this.x = this.column * columnSize;
 		this.y = this.row * rowSize;
-		console.log(this.y);
 		this.users = [];
 		
 		var html = groupTemplate.join('');
@@ -164,6 +162,10 @@
 		this.el.on('dragleave', function () {
 			dragCount -= 1;
 		});
+		this.el.on('dragstop', function () {
+			this.x = this.el.css('left');
+			this.y = this.el.css('top');
+		}.bind(this));
 		this.el.on('click', function () {
 			console.log('clicked');	
 			var tip = $('#tiptip_content');
@@ -191,12 +193,18 @@
 		},
 		
 		moveTo: function (x, y) {
+			this.x = x;
+			this.y = y;
 			$(this.el).css({ top: y, left: x });
 		},
 		
 		updateCount: function () {
 			// Sets the count text in this group to this size of the user array
 			$(this.el).find('.loadingText').text(this.users.length);
+		},
+		
+		getUserNames: function () {
+			return this.users.map(function (u) { return { name: u.name, active: u.active }; });
 		}
 	};
 })();
