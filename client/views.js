@@ -43,6 +43,8 @@
 		data: '#fileList',
 		groups: '#circleArea'
 	};
+	// Hashset of the users we are displaying
+	var users = { };
 
 	var dropTarget = null,
 		dragCount = 0;
@@ -55,7 +57,7 @@
 		var html = userTemplate.join('');
 		// Replace the template with data
 		html = html.replace('{name}', this.name).replace('{active}', this.active ? 'green' : 'gray');
-		if (!stringOnly) {
+		if (!users[this.name] && !stringOnly) {
 			this.el = $(html);
 			$(containers.users).append(this.el);
 			this.el.on('dragstart', function (e) {
@@ -75,6 +77,7 @@
 				dragCount = 0;
 				dropTarget = null;
 			}.bind(this));
+			users[this.name] = 1;
 		}
 		else {
 			this.html = html;

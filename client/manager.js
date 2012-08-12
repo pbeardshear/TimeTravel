@@ -101,6 +101,8 @@ Page.Manager = (function () {
 		
 		window.onbeforeunload = function () {
 			saveGroups();
+			// Tell the server that the user is disconnecting
+			socket.emit('disconnecting');
 		};
 	}
 	
