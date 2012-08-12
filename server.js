@@ -1,5 +1,5 @@
 var exp = require('express'),
-	app = exp.createServer(),
+	app = exp.createServer(exp.logger(), exp.bodyParser(), exp.static(__dirname + '/client')),
 	io = require('socket.io').listen(app);
 	// Load in app-specific code
 require('./server/app');
@@ -14,8 +14,8 @@ app.get('/request', function (req, res) {
 	res.sendfile(__dirname + '/client/request.html');
 });
 
-app.get('/:id', function (req, res) {
-	res.sendfile(__dirname + '/client/index.html');
+app.get('/rooms/:id', function (req, res) {
+	res.sendfile(__dirname + '/client/endpoint.html');
 });
 
 app.listen(process.env.PORT || 3000, function () {
@@ -28,16 +28,44 @@ app.listen(process.env.PORT || 3000, function () {
 //
 io.sockets.on('connection', function (socket) {
 	// Register the connection
-	registerConnection(socket);
+	socket.on('register', function (data, cb) {
+		if (!data.id) {
+			// New user
+			registerConnection(socket);
+		}
+		else {
+			// Reset the connection this user is on
+			resetSocket(data.id, socket);
+		}
+		cb && cb();
+	});
 	
+	socket.on('join', function (data) {
+		console.log('joining', data);
+		var user = getConnection(data.id),
+			room = getRoom(data.roomID);
+		if (room) {
+			if (!user.room) {
+				room.addUser(user);
+			}
+		}
+		else {
+			// Redirect back to the request page
+			socket.emit('response', {
+				success: false,
+				action: 'redirect',
+				location: baseURL + '/request'
+			});
+		}
+	});
+	 
 	// Bind handlers for messages from the client
-	socket.on('register', function () {
+	socket.on('request', function (data) {
 		// User is registering for a new namespace
 		// Check if this connection doesn't have a namespace yet
-		var user = getConnection(socket);
-		if (!user.hasRegistered) {
+		var user = getConnection(data.id);
+		if (!user.room) {
 			user.generateNamespace();
-			
 		}
 		// Redirect to their existing namespace
 		socket.emit('response', {
@@ -48,7 +76,8 @@ io.sockets.on('connection', function (socket) {
 	});
 	
 	socket.on('broadcast', function (data) {
-		var user = getConnection(socket);
+		console.log(data);
+		var user = getConnection(data.id);
 		user.room.broadcast(user, data);
 	});
 	

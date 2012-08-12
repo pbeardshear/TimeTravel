@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<head>
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript" src="/overrides.js"></script>
+	<script>
+		socket.on('response', function (data) {
+			if (data.success) {
+				switch (data.action) {
+					case 'broadcast':
+						console.log(data.data);
+						break;
+				}
+			}
+		});
+	</script>
+</head>
+<body>
+</body>
+</html>

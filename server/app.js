@@ -29,8 +29,11 @@ User.prototype = {
 	},
 	
 	send: function (data) {
+		// Remove the id property from the data we are sending
+		delete data.id;
 		this.__socket.emit('response', {
 			success: true,
+			action: 'broadcast',
 			data: data
 		});
 	}
@@ -61,17 +64,33 @@ BigRoom.prototype = {
 //
 // 	Public
 //
-baseURL = 'http://localhost:3000/';
+baseURL = 'http://localhost:3000/rooms/';
 
 registerConnection = function (socket) {
 	connections[socket.id] = new User(socket);
 	socket.emit('response', {
 		success: true,
+		action: 'register',
 		id: socket.id
 	});
 };
 
-getConnection = function (socket) {
-	return connections[socket.id] || null;
+resetSocket = function (id, socket) {
+	var user = connections[id];
+	if (user) {
+		user.__socket = socket;
+	}
+	else {
+		// The user has an idea, but we don't recognize it,
+		// so generate another valid one for them
+		registerConnection(socket);
+	}
 };
 
+getConnection = function (id) {
+	return connections[id] || null;
+};
+
+getRoom = function (id) {
+	return namespaces[id] || null;
+};
