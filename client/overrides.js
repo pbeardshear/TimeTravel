@@ -62,10 +62,23 @@
 	
 	// Send registration to the server
 	__socket.emit('register', {}, function () {
-		if (window.location.href.indexOf('rooms') != -1) {
-			// User is in a room, request a join
-			var roomID = window.location.href.match(/\/rooms\/(.*)/)[1]
-			__socket.emit('join', { roomID: roomID });
+		// Check if the user has a name set, if not display a popup asking for the name
+		var name = localStorage.getItem('__name');
+		if (name) {
+			if (window.location.href.indexOf('rooms') != -1) {
+				// User is in a room, request a join
+				var roomID = window.location.href.match(/\/rooms\/(.*)/)[1]
+				__socket.emit('join', { roomID: roomID, name: name });
+			}
+		}
+		else {
+			popupName(function () {
+				if (window.location.href.indexOf('rooms') != -1) {
+					// User is in a room, request a join
+					var roomID = window.location.href.match(/\/rooms\/(.*)/)[1]
+					__socket.emit('join', { roomID: roomID, name: localStorage.getItem('__name') });
+				}
+			});
 		}
 	});
 	

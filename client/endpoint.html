@@ -3,6 +3,16 @@
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 	<script type="text/javascript" src="/overrides.js"></script>
 	<script>
+		function popupName(callback) {
+			// Open a lightbox
+			// When the user enters their name and everything is good, execute the callback
+			
+			// DEBUG
+			localStorage.setItem('__name', 'Peter');
+			callback();
+			// END DEBUG
+		}
+	
 		socket.on('response', function (data) {
 			if (data.success) {
 				switch (data.action) {

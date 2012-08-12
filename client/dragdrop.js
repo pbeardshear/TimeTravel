@@ -58,7 +58,7 @@ Page = (function() {
 					},
 					done: function(data) {
 						$("#status").text(JSON.stringify(data[0].url));
-						socket.emit('broadcast', data[0].url);	
+						socket.emit('broadcast', { type: 'file', url: data[0].url });	
 					}
 				});
 			window.addEventListener("keypress", newFileUploaded);

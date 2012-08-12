@@ -16,7 +16,7 @@ app.get('/request', function (req, res) {
 
 app.get('/rooms/:id', function (req, res) {
 	if (getRoom(req.params.id)) {
-		res.sendfile(__dirname + '/client/endpoint.html');
+		res.sendfile(__dirname + '/client/index.html');
 	}
 	else {
 		// No room with this id, redirect back to request
@@ -56,7 +56,7 @@ io.sockets.on('connection', function (socket) {
 			room = getRoom(req.roomID);
 		if (room) {
 			if (!user.room) {
-				room.addUser(user);
+				room.addUser(user, req.name);
 			}
 		}
 		else {
@@ -73,6 +73,7 @@ io.sockets.on('connection', function (socket) {
 	socket.on('request', function (req) {
 		// User is registering for a new namespace
 		// Check if this connection doesn't have a namespace yet
+		console.log('request', req);
 		var user = getConnection(req.id);
 		if (!user.room) {
 			user.generateNamespace();

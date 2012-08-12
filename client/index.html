@@ -3,7 +3,16 @@
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
 	<script type="text/javascript" src="https://api.filepicker.io/v0/filepicker.js"></script>
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
-	<script type="text/javascript" src="dragdrop.js"></script>
+	<script type="text/javascript" src="/overrides.js"></script>
+	<script type="text/javascript" src="/dragdrop.js"></script>
+	<script>
+		function popupName(callback) {
+			// DEBUG
+			localStorage.setItem('__name', 'Peter');
+			callback();
+			// END DEBUG
+		}
+	</script>
 	<link type="stylesheet" type="text/css" href="dragdrop.css" />
 	<style>
 		#drop

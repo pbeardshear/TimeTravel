@@ -12,6 +12,7 @@ function UID (a) {
 function User (socket) {
 	this.__socket = socket;
 	this.id = socket.id;
+	this.name = '';
 	this.hasRegistered = false;
 	this.hasConnected = false;
 	this.room = null;
@@ -23,9 +24,7 @@ User.prototype = {
 		var namespace = new BigRoom(),
 			uid = UID();
 		namespaces[uid] = namespace;
-		namespace.addUser(this);
 		this.namespace = uid;
-		this.hasRegistered = true;
 	},
 	
 	send: function (blob) {
@@ -44,9 +43,14 @@ function BigRoom () {
 }
 
 BigRoom.prototype = {
-	addUser: function (user) {
+	addUser: function (user, name) {
 		user.room = this;
+		user.name = name;
 		this.users.push(user);
+		// Broadcast the user joining to all other users in the room
+		this.broadcast(user, {
+			name: name
+		});
 	},
 	
 	broadcast: function (user, data) {
