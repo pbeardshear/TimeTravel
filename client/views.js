@@ -5,7 +5,7 @@
 (function () {
 	// Private
 	var userTemplate = [
-			'<div class="userItem">',
+			'<div class="userItem" draggable="true">',
 				'<div class="inline activeCircle {active}"></div>',
 				'<div class="inline userName">',
 					'<span>{name}</span>',
@@ -40,6 +40,8 @@
 		groups: '#circleArea'
 	};
 
+	var dropTarget = null,
+		dragCount = 0;
 	// Public
 	Page.UserItem = function (name, active, stringOnly) {
 		this.name = name;
@@ -52,6 +54,22 @@
 		if (!stringOnly) {
 			this.el = $(html);
 			$(containers.users).append(this.el);
+			this.el.on('dragstart', function (e) {
+				dragging = true;
+			});
+			this.el.on('dragend', function (e) {
+				if (dragCount > 0) {
+					// We dropped onto a circle group
+					// Add ourselves to that group
+					console.log('successful drop');
+					// Only allow drops if the user doesn't already belong to this group
+					if (dropTarget.users.indexOf(this) == -1) {
+						dropTarget.users.push(this);
+					}
+				}
+				dragCount = 0;
+				dropTarget = null;
+			}.bind(this));
 		}
 		else {
 			this.html = html;
@@ -113,15 +131,22 @@
 		this.el.css({ top: this.y, left: this.x });
 		$(containers.groups).append(this.el);
 		
-		this.el.bind('mouseenter', function () {
+		this.el.on('mouseenter', function () {
 			var content = '';
 			// Load the tooltip
 			$('#tiptip_content').empty();
 			for (var i = 0; i < this.users.length; i++) {
-				content += new Page.UserItem(this.users[i].name, this.users[i].active, true);
+				content += (new Page.UserItem(this.users[i].name, this.users[i].active, true)).html;
 			}
 			$('#tiptip_content').append(content);
 		}.bind(this));
+		this.el.on('dragenter', function () {
+			dropTarget = this;
+			dragCount += 1;
+		}.bind(this));
+		this.el.on('dragleave', function () {
+			dragCount -= 1;
+		});
 		
 		Page.attachFilepicker(this.id);
 		Page.createUserTooltip(this.id);
