@@ -172,16 +172,6 @@
 			tip.empty();
 			tip.append('<p>Press enter to send a message</p><textarea id="textMessage"></textarea>');
 			$('#textMessage').focus();
-			$(window).on('keydown', function (e) {
-				if (e.target.id === 'textMessage' && e.keyCode === 13) {
-					// Send message
-					socket.emit('broadcast', e.target.value);
-					e.target.value = "";
-					
-					e.preventDefault();
-					e.stopPropagation();
-				}
-			});
 		});
 		
 		Page.attachFilepicker(this.id);
