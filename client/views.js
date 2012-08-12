@@ -24,12 +24,16 @@
 		groupTemplate = [
 			'<div class="group {color}" id="{id}">',
 				'<div class="groupName">{groupName}</div>',
-				'<div class="circle"></div>',
+				'<div class="circle">',
+					'<span class="loadingText"></span>',
+				'</div>',
 			'</div>'
 		];
 	
-	var colors = [];
-	var groupIndex = 0;
+	var colors = ['red'];
+	var groupIndex = 0,
+		rowSize = 150,
+		columnSize = 150;
 	var containers = {
 		users: '#userList',
 		data: '#fileList',
@@ -70,17 +74,17 @@
 		}
 	};
 	
-	Page.DataItem = function (user, data, icon) {
+	Page.DataItem = function (user, data) {
 		this.user = user;
 		this.data = data;
-		this.icon = icon;
+		this.icon = data.type === 'file' ? 'file image' : 'text image';
 		
 		if (data.type === 'file') {
 			this.data = '<a href="' + data.url + '">' + data.fileName + '</a>';
 		}
 		
 		var html = dataTemplate.join('');
-		html = html.replace('{user}', this.user).replace('{data}', this.data).replace('{icon}', icon);
+		html = html.replace('{user}', this.user).replace('{data}', this.data).replace('{icon}', this.icon);
 		this.el = $(html);
 		$(containers.data).append(this.el);
 	};
@@ -106,7 +110,7 @@
 		var html = groupTemplate.join('');
 		html = html.replace('{color}', this.color).replace('{id}', this.id).replace('{groupName}', this.name);
 		this.el = $(html);
-		this.el.css({ top: y, left: x });
+		this.el.css({ top: this.y, left: this.x });
 		$(containers.groups).append(this.el);
 		
 		this.el.bind('mouseenter', function () {
@@ -117,7 +121,7 @@
 				content += new Page.UserItem(this.users[i].name, this.users[i].active, true);
 			}
 			$('#tiptip_content').append(content);
-		});
+		}.bind(this));
 		
 		Page.attachFilepicker(this.id);
 		Page.createUserTooltip(this.id);

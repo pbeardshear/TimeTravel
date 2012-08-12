@@ -3,12 +3,13 @@
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
 	
 	<script type="text/javascript" src="/jquery.tipTip.minified.js"></script>	
-	<script type="text/javascript" src="/jquery-tooltip/jquery.tooltip.min.js"></script>
 	<script type="text/javascript" src="https://api.filepicker.io/v0/filepicker.js"></script>
 	<script type="text/javascript" src="http://cdn.sencha.io/ext-4.1.0-gpl/ext-all.js"></script>
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 	<script type="text/javascript" src="/overrides.js"></script>
 	<script type="text/javascript" src="/dragdrop.js"></script>
+	<script type="text/javascript" src="/views.js"></script>
+	<script type="text/javascript" src="/manager.js"></script>
 	<script>
 		function popupName(callback) {
 			// DEBUG
@@ -16,13 +17,19 @@
 			callback();
 			// END DEBUG
 		}
+		
+		$(function () {
+			new Page.Group('Development', 0, 0);
+			
+			new Page.UserItem('Poop McGee', true);
+			new Page.DataItem('Bryan Chuchu', { type: 'file', url: 'http://www.google.com', fileName: 'myawesomefile.js' });
+		});
 	</script>
 	<link rel="stylesheet" type="text/css" href="/dragdrop.css" />
 	<link rel="stylesheet" type="text/css" href="/tipTip.css" />
-
 </head>
 <body>
-	
+	<!--
 	<div id="drop">
 	Drag and drop baby	
 	</div>
@@ -32,19 +39,19 @@
 	<div id="status">
 	
 	</div>
-	
+	-->
 	<div id="container">
 		<div class="sidebar" id="fileList">
 		</div>
 		<div id="circleArea">
 			<!-- Circle groups go here -->
-			
 		</div>
 		<div class="sidebar" id="userList">
 			<!-- List of users goes here -->
 		</div>
 		<div class="floating" id="addCircle">
-			
+			<input type="text" id="groupName" />
+			<button id="createGroup">Create Group</button>
 		</div>
 		<div class="floating" id="options">
 			

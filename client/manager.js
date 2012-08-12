@@ -17,7 +17,7 @@ Page.Manager = (function () {
 					}
 					break;
 				case 'broadcast':
-					dataItems.push(new Page.DataItem(data.sender, data.data);
+					dataItems.push(new Page.DataItem(data.sender, data.data));
 					break;
 			}
 		}
@@ -25,7 +25,7 @@ Page.Manager = (function () {
 	
 	function onload() {
 		// Run code that requires the dom
-		$('#createGroup').click(function () {
+		$('#addCircle').click(function () {
 			groups.push(new Page.Group($('#groupName').val(), currentRow, currentColumn));
 			column = (column + 1) % columnCount;
 			if (column == 0) {

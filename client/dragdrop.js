@@ -28,38 +28,33 @@ Page = (function() {
 		filepicker.makeDropPane($('#' + id)[0], {
 		dragEnter: function() {
 			console.log('enter');
-			$("#" + id).html("Drop to upload").css({
+			$("#" + id).css({
 				//circle expansion here
 	
 			});
 		},
 		dragLeave: function() {
-			$("#" + id).html("Drop files here").css({
+			$("#" + id).css({
 				//circle unexpansion here
 
 			});
 		},
 		progress: function(percentage) {
-			$("#" + id).text(percentage+ "%");
-			
+			var loadingText = $("#" + id + ' .loadingText');
+			loadingText.show();
+			loadingText.text(percentage+ "%");
 		},
 		done: function(data) {
-			$("#status").text(JSON.stringify(data[0].url));
+			var loadingText = $('#' + id + ' .loadingText');
+			setTimeout(function () { loadingText.fadeOut(300); }, 500);
 			socket.emit('broadcast', { name: data[0].data.filename, size: data[0].data.size, fileType: data[0].data.type, type: 'file', url: data[0].url });
 		}
 	});
 	}
 	
 	function createUserTooltip(id) {
-		function getMemberUsers() {
-			var users = Page.Manager.setActiveGroup(id);
-			
-		}
-	
-		var config = {
-			content: getMemberUsers()
-		};
-		$('#status').tipTip(config); 
+		var config = { content: '' };
+		$('#' + id).tipTip(config); 
 	}
 	
 	function createSendTextFileTooltip() {
