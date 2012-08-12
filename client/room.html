@@ -28,10 +28,13 @@
 		}
 		
 		$(function () {
-			new Page.Group('Development', 0, 0);
+			new Page.Group('Everyone', 0, 0);
+			new Page.Group('Development', 0, 1);
+			new Page.Group('Out of Office', 0, 2);
 			
 			new Page.UserItem('Poop McGee', true);
 			new Page.DataItem('Bryan Chuchu', { type: 'file', url: 'http://www.google.com', fileName: 'myawesomefile.js' });
+			new Page.DataItem('Peter B.', { type: 'text', data: 'What is up guys?' });
 		});
 	</script>
 	<link rel="stylesheet" type="text/css" href="/dragdrop.css" />

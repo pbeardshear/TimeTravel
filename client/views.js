@@ -6,7 +6,7 @@
 	// Private
 	var userTemplate = [
 			'<div class="userItem" draggable="true">',
-				'<div class="inline activeCircle {active}"></div>',
+				'<div class="inline activeCircle"><img src="/images/{active}.png" /></div>',
 				'<div class="inline userName">	',
 					'<span>{name}</span>',
 				'</div>',
@@ -17,9 +17,8 @@
 			'<div class="dataItem">',
 				'<div class="inline icon">{icon}</div>',
 				'<div class="inline wrapper">',
-					'<div class="user">Sender: {user}</div>',
+					'<div class="user">{user}:</div>',
 					'<div class="userData">{data}</div>',
-					'<div class="size">{size}</div>',
 				'</div>',
 			'</div>',
 			'<div class="separator"></div>'
@@ -33,7 +32,7 @@
 			'</div>'
 		];
 	
-	var colors = ['red'];
+	var colors = ['red', 'blue', 'green', 'orange', 'yellow', 'purple'];
 	var groupIndex = 0,
 		rowSize = 150,
 		columnSize = 150;
@@ -53,7 +52,7 @@
 		// Create the HTML to encapsulate this element
 		var html = userTemplate.join('');
 		// Replace the template with data
-		html = html.replace('{name}', this.name).replace('{active}', this.active ? 'active' : 'inactive');
+		html = html.replace('{name}', this.name).replace('{active}', this.active ? 'green' : 'gray');
 		if (!stringOnly) {
 			this.el = $(html);
 			$(containers.users).append(this.el);
@@ -97,8 +96,8 @@
 	
 	Page.DataItem = function (user, data) {
 		this.user = user;
-		this.data = data;
-		this.icon = data.type === 'file' ? '<img src="http://www.shebytes.com/wp-content/uploads/2011/04/2011_04_27_apple_iphone_email_attachment_how_to_save_app.png">' : '<img src="http://carefulchaos.files.wordpress.com/2011/08/bigstock_thought_bubble_4573249.jpg">';
+		this.data = data.data;
+		this.icon = data.type === 'file' ? '<img src="/images/file.png">' : '<img src="/images/talk.png">';
 		this.size = data.size;
 		
 		if (data.type === 'file') {
@@ -127,6 +126,7 @@
 		this.color = colors.splice(Math.floor(Math.random() * colors.length), 1);
 		this.x = this.column * columnSize;
 		this.y = this.row * rowSize;
+		console.log(this.y);
 		this.users = [];
 		
 		var html = groupTemplate.join('');

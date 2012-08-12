@@ -12,8 +12,13 @@ Page.Manager = (function () {
 		if (data.success) {
 			switch (data.action) {
 				case 'users':
-					for (var i = 0; i < data.data.users.length; i++) {
-						userItems.push(new Page.UserItem(data.data.users[i], true));
+					if (data.data.users) {
+						for (var i = 0; i < data.data.users.length; i++) {
+							userItems.push(new Page.UserItem(data.data.users[i], true));
+						}
+					}
+					else {
+						userItems.push(new Page.UserItem(data.data.name, true));
 					}
 					break;
 				case 'broadcast':
