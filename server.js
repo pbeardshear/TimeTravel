@@ -10,22 +10,14 @@ app.get('/', function (req, res) {
 	res.sendfile(__dirname + '/client/index.html');
 });
 
-app.get('/request', function (req, res) {
-	res.sendfile(__dirname + '/client/request.html');
-});
-
 app.get('/rooms/:id', function (req, res) {
 	if (getRoom(req.params.id)) {
-		res.sendfile(__dirname + '/client/index.html');
+		res.sendfile(__dirname + '/client/room.html');
 	}
 	else {
 		// No room with this id, redirect back to request
-		res.redirect('/request');
+		res.redirect('/');
 	}
-});
-
-app.get('/downloads/:id', function (req, res) {
-	// Send the file as a download
 });
 
 app.listen(process.env.PORT || 3000, function () {
@@ -82,7 +74,7 @@ io.sockets.on('connection', function (socket) {
 		socket.emit('response', {
 			success: true,
 			action: 'redirect',
-			location: baseURL + user.namespace
+			location: baseURL + 'rooms/' + user.namespace
 		});
 	});
 	
@@ -92,4 +84,19 @@ io.sockets.on('connection', function (socket) {
 		user.room.broadcast(user, req);
 	});
 	
+	socket.on('email', function (req) {
+		console.log('sending email');
+		// req.users is a list of { email: '...', data: '...' }
+		
+	});
+	
+	socket.on('text', function (req) {
+		console.log('sending text');
+		// req.users is a list of { number: '...', data: '...' }
+		// This won't work until we get an API key from Twilio...
+		http.request({
+			host: '',
+			method: 'GET'
+		});
+	});
 });

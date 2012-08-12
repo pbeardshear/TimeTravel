@@ -27,12 +27,12 @@ User.prototype = {
 		this.namespace = uid;
 	},
 	
-	send: function (blob) {
+	send: function (blob, type) {
 		// Remove the id property from the data we are sending
 		delete blob.id;
 		this.__socket.emit('response', {
 			success: true,
-			action: 'broadcast',
+			action: (type || 'broadcast'),
 			data: blob
 		});
 	}
@@ -46,6 +46,8 @@ BigRoom.prototype = {
 	addUser: function (user, name) {
 		user.room = this;
 		user.name = name;
+		// Give the new user the list of users in this room
+		user.send({ users: this.users, 'users');
 		this.users.push(user);
 		// Broadcast the user joining to all other users in the room
 		this.broadcast(user, {
@@ -54,7 +56,7 @@ BigRoom.prototype = {
 	},
 	
 	broadcast: function (user, data) {
-		// Send the data out to all users, except the one passed in
+		var userList = data.users ? this.users.filter(function (user) { return data.users.indexOf(user.name) != -1; }) : this.users;
 		for (var i = 0; i < this.users.length; i++) {
 			if (this.users[i].id != user.id) {
 				this.users[i].send(data);
@@ -64,11 +66,10 @@ BigRoom.prototype = {
 };
 
 
-
 //
 // 	Public
 //
-baseURL = 'http://localhost:3000/rooms/';
+baseURL = 'http://localhost:3000/';
 
 registerConnection = function (socket) {
 	connections[socket.id] = new User(socket);
