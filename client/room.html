@@ -66,8 +66,10 @@
 			
 		}
 		
-		#circleArea { width: 80%; }
-		#sideBar { width: 20%; }
+		#circleArea { width: 60%; height: 100%; }
+		#fileList { left: 0px; }
+		#userList { right: 0px; }
+		.sideBar { width: 20%; height: 100%; position: absolute; }
 		.floating { position: absolute; }
 		#addCircle { top: 0px; right: 20%; }
 		#options: { bottom: 0px; left: 0px; }
@@ -86,11 +88,13 @@
 	</div>
 	-->
 	<div id="container">
+		<div class="sidebar" id="fileList">
+		</div>
 		<div id="circleArea">
 			<!-- Circle groups go here -->
 			
 		</div>
-		<div id="sidebar">
+		<div class="sidebar" id="userList">
 			<!-- List of users goes here -->
 		</div>
 		<div class="floating" id="addCircle">
