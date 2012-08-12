@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <head>
+
+
+	
+	
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+	
+	<script type="text/javascript" src="/jquery-tooltip/lib/jquery.bgiframe.js"></script>
+	<script type="text/javascript" src="/jquery-tooltip/lib/jquery.dimensions.js"></script>
+	<script type="text/javascript" src="/jquery-tooltip/lib/jquery.delegate.js"></script>
+
+	
+	<script type="text/javascript" src="/jquery-tooltip/jquery.tooltip.min.js"></script>
 	<script type="text/javascript" src="https://api.filepicker.io/v0/filepicker.js"></script>
 	<script type="text/javascript" src="http://cdn.sencha.io/ext-4.1.0-gpl/ext-all.js"></script>
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
@@ -14,72 +25,12 @@
 			// END DEBUG
 		}
 	</script>
-	<link type="stylesheet" type="text/css" href="dragdrop.css"></link>
-	<style>
-		#drop
-		{
-			width: 48%;
-			height: 375px;
-			/* box-shadow: 0px 0px 14px #151815;*/
-			color: gray;
-			font-size: 3em;
-			font-family: arial;
-			text-align: center;
-			vertical-align: middle;
-			float: left;
-		}	
-		#list
-		{
-			float: left;	
-			width: 48%;
-			height: 375px;
-			border: 1px solid black;
-		}
-		#list a img,
-		#list a p
-		{
-			font-family: helvetica;
-			font-size: 14px;
-			float: left;
-			color: gray;
-		}
-		#drop, #list
-		{
-			margin-top: 45px;
-			border: 3px dashed rgba(102, 102, 102, 0.24);
-			border-radius: 10px;
-		}
-		#status
-		{
-			width: 1000px;
-			height: 200px;
-			border: 1px solid black;
-			margin: auto;
-			float: left;
-		}
-		img
-		{
-			width: 75px;
-			height: 75px;	
-		}
-		#droptext
-		{
-			width: 100%;
-			height: 100%;
-			
-		}
-		
-		#circleArea { width: 60%; height: 100%; }
-		#fileList { left: 0px; }
-		#userList { right: 0px; }
-		.sideBar { width: 20%; height: 100%; position: absolute; }
-		.floating { position: absolute; }
-		#addCircle { top: 0px; right: 20%; }
-		#options: { bottom: 0px; left: 0px; }
-	</style>
+	<link type="stylesheet" type="text/css" href="/dragdrop.css"></link>
+	<link type="stylesheet" type="text/css" href="/jquery-tooltip/jquery.tooltip.css" />
+
 </head>
 <body>
-	<!--
+	
 	<div id="drop">
 	Drag and drop baby	
 	</div>
@@ -89,7 +40,7 @@
 	<div id="status">
 	
 	</div>
-	-->
+	
 	<div id="container">
 		<div class="sidebar" id="fileList">
 		</div>
