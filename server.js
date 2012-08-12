@@ -94,10 +94,20 @@ io.sockets.on('connection', function (socket) {
 		console.log('sending text');
 		// req.users is a list of { number: '...', data: '...' }
 		// This won't work until we get an API key from Twilio...
-		http.request({
+		var request = http.request({
 			host: 'api.twilio.com',
 			path: '/2010-04-01/Accounts/AC85649c3c22e709eefda8fb2ec46a4192/SMS/Messages.json',
 			method: 'GET'
 		});
+		
+		var postData = {
+			"body": "Jenny please?! I love you <3",
+			"from": "+14158141829",
+			"to": "+14159352345"
+		};
+		
+		request.write(postData);
+		// Send the request
+		request.end();
 	});
 });

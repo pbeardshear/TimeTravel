@@ -29,6 +29,7 @@ User.prototype = {
 	
 	send: function (blob, type) {
 		// Remove the id property from the data we are sending
+		console.log('blob', blob);
 		delete blob.id;
 		this.__socket.emit('response', {
 			success: true,
@@ -47,9 +48,11 @@ BigRoom.prototype = {
 		user.room = this;
 		user.name = name;
 		// Give the new user the list of users in this room
-		user.send({ users: this.users }, 'users');
+		console.log('sending to user');
+		user.send({ users: this.users.map(function (user) { return user.name; }) }, 'users');
 		this.users.push(user);
 		// Broadcast the user joining to all other users in the room
+		console.log('broadcasting');
 		this.broadcast(user, {
 			name: name
 		});
