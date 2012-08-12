@@ -142,6 +142,9 @@
 			for (var i = 0; i < this.users.length; i++) {
 				content += (new Page.UserItem(this.users[i].name, this.users[i].active, true)).html;
 			}
+			if (!content) {
+				content = '<p>There are no users in this group.<br />Add users by dragging them from the right.</p>';
+			}
 			$('#tiptip_content').append(content);
 		}.bind(this));
 		this.el.on('dragenter', function () {
@@ -153,11 +156,9 @@
 		});
 		this.el.on('click', function () {
 			console.log('clicked');	
-			var textContent = [
-				'<p>Press enter to send a message</p>',
-				'<textarea id="textMessage"></textarea>'
-			];
-			$('#tiptip_content').append(textContent.join(''));
+			var tip = $('#tiptip_content');
+			tip.empty();
+			tip.append('<p>Press enter to send a message</p><textarea id="textMessage"></textarea>');
 			$('#textMessage').focus();
 			$(window).on('keydown', function (e) {
 				if (e.target.id === 'textMessage' && e.keyCode === 13) {
