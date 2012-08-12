@@ -47,12 +47,8 @@ Page = (function() {
 		},
 		progress: function(percentage) {
 			var loadingText = $("#" + id + ' .loadingText');
-			loadingText.show();
-			loadingText.text(percentage+ "%");
 		},
 		done: function(data) {
-			var loadingText = $('#' + id + ' .loadingText');
-			setTimeout(function () { loadingText.fadeOut(300); }, 500);
 			socket.emit('broadcast', { sender: sender, name: data[0].data.filename, size: data[0].data.size, fileType: data[0].data.type, type: 'file', url: data[0].url });
 		}
 	});

@@ -104,7 +104,7 @@
 		this.size = data.size;
 		
 		if (data.type === 'file') {
-			this.data = '<a href="' + data.url + '">' + data.fileName + '</a>';
+			this.data = '<a href="' + data.url + '">' + (data.name || data.fileName) + '</a>';
 		}
 		
 		var html = dataTemplate.join('');
