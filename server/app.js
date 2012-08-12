@@ -11,6 +11,7 @@ function UID (a) {
 
 function User (socket) {
 	this.__socket = socket;
+	this.active = true;
 	this.id = socket.id;
 	this.name = '';
 	this.hasRegistered = false;
@@ -50,7 +51,7 @@ BigRoom.prototype = {
 		user.name = name;
 		// Give the new user the list of users in this room
 		console.log('sending to user');
-		user.send({ users: this.users.map(function (user) { return user.name; }) }, 'users');
+		user.send({ users: this.users.map(function (user) { return user.active && user.name; }) }, 'users');
 		this.users.push(user);
 		// Broadcast the user joining to all other users in the room
 		console.log('broadcasting');

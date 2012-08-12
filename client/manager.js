@@ -12,7 +12,7 @@ Page.Manager = (function () {
 		if (data.success) {
 			switch (data.action) {
 				case 'users':
-					for (var i = 0; i < data.users.length; i++) {
+					for (var i = 0; i < data.data.users.length; i++) {
 						userItems.push(new Page.UserItem(data.data.users[i], true));
 					}
 					break;
@@ -26,7 +26,7 @@ Page.Manager = (function () {
 	function onload() {
 		// Run code that requires the dom
 		$('#addCircle').click(function () {
-			groups.push(new Page.Group($('#groupName').val(), currentRow, currentColumn));
+			groups.push(new Page.Group($('#groupName').val(), row, column));
 			column = (column + 1) % columnCount;
 			if (column == 0) {
 				row += 1;

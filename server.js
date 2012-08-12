@@ -43,10 +43,14 @@ io.sockets.on('connection', function (socket) {
 		cb && cb();
 	});
 	
-	socket.on('disconnect', function () {
-		// User disconnected
-		console.log('disconnected');
-	});
+	// socket.on('disconnect', function (req) {
+		// // User disconnected
+		// console.log('disconnected');
+		// var user = getConnection(socket.id);
+		// if (user) {
+			// user.active = false;
+		// }
+	// });
 	
 	socket.on('join', function (req) {
 		console.log('joining', req);
@@ -55,6 +59,12 @@ io.sockets.on('connection', function (socket) {
 		if (room) {
 			if (!user.room) {
 				room.addUser(user, req.name);
+			}
+			else {
+				// User has a room, but is rejoining
+				// send out a message to all users
+				user.room.broadcast(user, { users: user.room.users.map(function (user) { return user.active && user.name; }) }, 'users');
+				user.send({ name: user.name }, 'users');
 			}
 		}
 		else {
