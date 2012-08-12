@@ -11,10 +11,13 @@ img { width: 75px; height: 75px; }
 #circleArea { width: 60%; height: 100%; margin: 0px auto; padding: 15px; }
 #fileList { left: 0px; border-right: 1px solid #CCC; }
 #userList { right: 0px; border-left: 1px solid #CCC; }
-.sidebar { width: 20%; height: 100%; position: absolute; background-color: #EEE; z-index: 10; top: 0px; }
+.sidebar { width: 20%; height: 100%; position: absolute; background-image: url(http://s.ytimg.com/yt/imgbin/www-refreshbg-vflC3wnbM.png); z-index: 10; top: 0px; }
 .floating { position: absolute; }
 #addCircle { top: 0px; right: 20%; border: 1px solid #CCC; border-top: none; border-right: none; padding: 10px; }
 #options { bottom: 0px; left: 0px; }
+#container > div {margin-top: 20px;}
+
+#maskInput {position: fixed; top: 45%; z-index: 5000; width: 100%; height: 300px; background-color: #026A8B}
 
 .group { height: 150px; width: 150px; text-align: center; }
 .group .groupName { font-size: 11px; font-family: Verdana, sans-serif; margin-bottom: 5px; }
