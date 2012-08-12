@@ -96,7 +96,7 @@ io.sockets.on('connection', function (socket) {
 		// This won't work until we get an API key from Twilio...
 		http.request({
 			host: 'api.twilio.com',
-			path: '/2010-04-01/Accounts/AC85649c3c22e709eefda8fb2ec46a4192/SMS/Messages/[SMSMessageSid].json',
+			path: '/2010-04-01/Accounts/AC85649c3c22e709eefda8fb2ec46a4192/SMS/Messages.json',
 			method: 'GET'
 		});
 	});
