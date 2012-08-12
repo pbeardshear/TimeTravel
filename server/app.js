@@ -28,13 +28,13 @@ User.prototype = {
 		this.hasRegistered = true;
 	},
 	
-	send: function (data) {
+	send: function (blob) {
 		// Remove the id property from the data we are sending
-		delete data.id;
+		delete blob.id;
 		this.__socket.emit('response', {
 			success: true,
 			action: 'broadcast',
-			data: data
+			data: blob
 		});
 	}
 };

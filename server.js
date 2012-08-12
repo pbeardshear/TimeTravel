@@ -15,7 +15,17 @@ app.get('/request', function (req, res) {
 });
 
 app.get('/rooms/:id', function (req, res) {
-	res.sendfile(__dirname + '/client/endpoint.html');
+	if (getRoom(req.params.id)) {
+		res.sendfile(__dirname + '/client/endpoint.html');
+	}
+	else {
+		// No room with this id, redirect back to request
+		res.redirect('/request');
+	}
+});
+
+app.get('/downloads/:id', function (req, res) {
+	// Send the file as a download
 });
 
 app.listen(process.env.PORT || 3000, function () {
@@ -40,10 +50,10 @@ io.sockets.on('connection', function (socket) {
 		cb && cb();
 	});
 	
-	socket.on('join', function (data) {
-		console.log('joining', data);
-		var user = getConnection(data.id),
-			room = getRoom(data.roomID);
+	socket.on('join', function (req) {
+		console.log('joining', req);
+		var user = getConnection(req.id),
+			room = getRoom(req.roomID);
 		if (room) {
 			if (!user.room) {
 				room.addUser(user);
@@ -60,10 +70,10 @@ io.sockets.on('connection', function (socket) {
 	});
 	 
 	// Bind handlers for messages from the client
-	socket.on('request', function (data) {
+	socket.on('request', function (req) {
 		// User is registering for a new namespace
 		// Check if this connection doesn't have a namespace yet
-		var user = getConnection(data.id);
+		var user = getConnection(req.id);
 		if (!user.room) {
 			user.generateNamespace();
 		}
@@ -75,10 +85,10 @@ io.sockets.on('connection', function (socket) {
 		});
 	});
 	
-	socket.on('broadcast', function (data) {
-		console.log(data);
-		var user = getConnection(data.id);
-		user.room.broadcast(user, data);
+	socket.on('broadcast', function (req) {
+		console.log(req);
+		var user = getConnection(req.id);
+		user.room.broadcast(user, req);
 	});
 	
 });
