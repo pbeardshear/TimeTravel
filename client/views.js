@@ -44,7 +44,8 @@
 		groups: '#circleArea'
 	};
 	// Hashset of the users we are displaying
-	var users = { };
+	var users = { },
+		everyoneGroup = null;
 
 	var dropTarget = null,
 		dragCount = 0;
@@ -78,6 +79,11 @@
 				dropTarget = null;
 			}.bind(this));
 			users[this.name] = 1;
+			// Creating a new user, add it to the "everyone"  group
+			if (!everyoneGroup.contains(this)) {
+				everyoneGroup.users.push(this);
+				everyoneGroup.updateCount();
+			}
 		}
 		else {
 			this.html = html;
@@ -179,6 +185,10 @@
 		
 		Page.attachFilepicker(this.id);
 		Page.createUserTooltip(this.id);
+		
+		if (this.name.toLowerCase() === 'everyone') {
+			everyoneGroup = this;
+		}
 	};
 	Page.Group.prototype = {
 		remove: function () {
@@ -198,6 +208,15 @@
 		
 		getUserNames: function () {
 			return this.users.map(function (u) { return { name: u.name, active: u.active }; });
+		},
+		
+		contains: function (user) {
+			for (var i = 0; i < this.users.length; i++) {
+				if (this.users[i].name === user.name) {
+					return true;
+				}
+			}
+			return false;
 		}
 	};
 })();
