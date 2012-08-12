@@ -51,7 +51,15 @@ Page = (function() {
 	}
 	
 	function createUserTooltip(id) {
-		$('#status').tipTip(); 
+		function getMemberUsers() {
+			var users = Page.Manager.setActiveGroup(id);
+			
+		}
+	
+		var config = {
+			content: getMemberUsers()
+		};
+		$('#status').tipTip(config); 
 	}
 	
 	function createSendTextFileTooltip() {
@@ -59,6 +67,7 @@ Page = (function() {
 	}
 	
 	return {
+		attachFilepicker: attachFilepicker,
 		init: function() {
 			filepicker.setKey('AjB_5ggM9QMO_uSoMgHNmz');
 					
