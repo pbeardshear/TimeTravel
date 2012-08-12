@@ -22,7 +22,7 @@ Page.Manager = (function () {
 					}
 					break;
 				case 'broadcast':
-					var newData = new Page.DataItem(data.sender, data.data)
+					var newData = new Page.DataItem(data.sender, data.data);
 					dataItems.push(newData);
 					document.getElementsByClassName('icon')[dataItems.length - 1].animate({top: '0px'});
 					break;
@@ -84,6 +84,21 @@ Page.Manager = (function () {
 		else {
 			createGroup('Everyone', true);
 		}
+		
+		$(window).on('keydown', function (e) {
+			if (e.target.id === 'textMessage' && e.keyCode === 13) {
+				// Send message
+				// For some reason this is getting called a bunch of times on enter...
+				if (e.target.value) {
+					socket.emit('broadcast', e.target.value);
+				}
+				e.target.value = "";
+				
+				e.preventDefault();
+				e.stopPropagation();
+			}
+		});
+		
 		window.onbeforeunload = function () {
 			saveGroups();
 		};
