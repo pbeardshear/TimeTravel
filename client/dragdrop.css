@@ -15,6 +15,7 @@ img { height: 20px; }
 .floating { position: absolute; }
 #addCircle { top: 0px; right: 20%; border: 1px solid #CCC; border-top: none; border-right: none; padding: 10px; margin-top: 60px; }
 #options { bottom: 0px; left: 0px; }
+.sidebar { box-shadow: 0px 0px 22px 6px #CCC;}
 
 
 
@@ -34,6 +35,7 @@ img { height: 20px; }
 .dataItem .wrapper a { color: #4575D4; }
 .inline {position: relative; float: left;}
 
+
 #header {position: relative; top: 0; width: 100%; height: 60px; background-color: #348DCE; -moz-box-shadow: 0 0 5px #333; -webkit-box-shadow: 0 0 5px #333; box-shadow: 0 0 5px #333; z-index: 20; }
 
 #maskInput {position: fixed; top: 45%; z-index: 5000; width: 100%; height: 300px; background-color: #026A8B}
@@ -47,6 +49,8 @@ img { height: 20px; }
 .orange .circle { border-color: #FFA400; }
 .purple .circle { border-color: #6C0AAB; }
 .circle { height: 60px; width: 60px; border-radius: 50%; border: 20px solid #F00; margin: 0px auto; }
+
+
 .circle:hover { height: 80px; width: 80px; }
 
 .hidden { display: none; }

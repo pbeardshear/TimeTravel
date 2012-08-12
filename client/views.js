@@ -19,6 +19,7 @@
 				'<div class="inline wrapper">',
 					'<div class="user">{user}:</div>',
 					'<div class="userData">{data}</div>',
+					'<div class="size">{size} bytes</div>',
 				'</div>',
 			'</div>',
 			'<div class="separator"></div>'
@@ -101,7 +102,7 @@
 		this.size = data.size;
 		
 		if (data.type === 'file') {
-			this.data = '<a href="' + data.url + '">' + data.fileName + '</a>';
+			this.data = '<a href="' + data.url + '">' + data.name + '</a>';
 		}
 		
 		var html = dataTemplate.join('');
@@ -134,6 +135,7 @@
 		this.el = $(html);
 		this.el.css({ top: this.y, left: this.x });
 		$(containers.groups).append(this.el);
+		$('#' + this.id).draggable();
 		
 		this.el.on('mouseenter', function () {
 			var content = '';

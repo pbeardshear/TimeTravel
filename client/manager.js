@@ -22,7 +22,9 @@ Page.Manager = (function () {
 					}
 					break;
 				case 'broadcast':
-					dataItems.push(new Page.DataItem(data.sender, data.data));
+					var newData = new Page.DataItem(data.sender, data.data)
+					dataItems.push(newData);
+					document.getElementsByClassName('icon')[dataItems.length - 1].animate({top: '0px'});
 					break;
 			}
 		}
