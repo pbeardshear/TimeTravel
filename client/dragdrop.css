@@ -15,13 +15,18 @@ img { height: 55px; }
 .floating { position: absolute; }
 #addCircle { top: 0px; right: 20%; border: 1px solid #CCC; border-top: none; border-right: none; padding: 10px; }
 #options { bottom: 0px; left: 0px; }
+
+#container > div {margin-top: 60px;}	
+
 .icon { float: left;}
 .userName { text-align: right;}
-.separator {width: 100%; height: 0; border-top: 1px solid #DDD; border-bottom: 1px solid white;}
+.separator {width: 100%; height: 0; border-top: 1px solid #DDD; border-bottom: 1px solid white; float: left}
 .active { border-radius: 50%; background-color: green;}
 .inactive { border-radius: 50%; background-color: red;}
-.activeCircle { width: 15px; height: 15px; margin: 3px;}
+.activeCircle { width: 12px; height: 12px; margin: 3px;}
 .inline {position: relative; float: left;}
+
+#header {position: relative; top: 0; width: 100%; height: 60px; background-color: #348DCE;}
 
 #maskInput {position: fixed; top: 45%; z-index: 5000; width: 100%; height: 300px; background-color: #026A8B}
 
