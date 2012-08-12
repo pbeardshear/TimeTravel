@@ -71,7 +71,7 @@ Page = (function() {
 	function createUserTooltip(id) {
 		// The userlist tooltip
 		// This tooltip has to have keepAlive on as well, in order for it to work for the textfield tooltip...
-		$('#' + id).tipTip({ defaultPosition: 'right' }); 
+		$('#' + id).tipTip({ defaultPosition: 'right', maxWidth: '250' }); 
 		// The textfield tooltip
 		
 		$('#' + id).tipTip({ 

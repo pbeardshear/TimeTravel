@@ -25,9 +25,11 @@
 		],
 		groupTemplate = [
 			'<div class="group {color}" id="{id}">',
-				'<div class="groupName">{groupName}</div>',
-				'<div class="circle">',
-					'<span class="loadingText"></span>',
+				'<div class="outerCircle">',
+					'<div class="circle">',
+						'<div class="groupName">{groupName}</div>',
+						'<span class="loadingText">0</span>',
+					'</div>',
 				'</div>',
 			'</div>'
 		];
@@ -67,6 +69,7 @@
 					// Only allow drops if the user doesn't already belong to this group
 					if (dropTarget.users.indexOf(this) == -1) {
 						dropTarget.users.push(this);
+						dropTarget.updateCount();
 					}
 				}
 				dragCount = 0;
@@ -143,10 +146,15 @@
 				content += (new Page.UserItem(this.users[i].name, this.users[i].active, true)).html;
 			}
 			if (!content) {
-				content = '<p>There are no users in this group.<br />Add users by dragging them from the right.</p>';
+				content += '<p>There are no users in this group.<br />Add users by dragging them from the right.</p>';
 			}
+			// Prepend the header text
+			content = '<p class="tipGroupName">' + this.name + '</p>' + content;
 			$('#tiptip_content').append(content);
 		}.bind(this));
+		if (this.name.length > 8) {
+			this.el.find('.groupName').css('font-size', '10px');
+		}
 		this.el.on('dragenter', function () {
 			dropTarget = this;
 			dragCount += 1;
@@ -182,6 +190,11 @@
 		
 		moveTo: function (x, y) {
 			$(this.el).css({ top: y, left: x });
+		},
+		
+		updateCount: function () {
+			// Sets the count text in this group to this size of the user array
+			$(this.el).find('.loadingText').text(this.users.length);
 		}
 	};
 })();

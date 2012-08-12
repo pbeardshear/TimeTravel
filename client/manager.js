@@ -30,11 +30,14 @@ Page.Manager = (function () {
 	
 	function onload() {
 		// Run code that requires the dom
-		$('#addCircle').click(function () {
-			groups.push(new Page.Group($('#groupName').val(), row, column));
-			column = (column + 1) % columnCount;
-			if (column == 0) {
-				row += 1;
+		$('#createGroup').click(function () {
+			var groupName = $('#groupName').val();
+			if (groupName) {
+				groups.push(new Page.Group(groupName, row, column));
+				column = (column + 1) % columnCount;
+				if (column == 0) {
+					row += 1;
+				}
 			}
 		});
 	}
