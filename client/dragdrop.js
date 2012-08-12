@@ -64,12 +64,24 @@ Page = (function() {
 	}
 	
 	function createUserTooltip(id) {
-		var config = { content: '' };
-		$('#' + id).tipTip(config); 
+		// The userlist tooltip
+		// This tooltip has to have keepAlive on as well, in order for it to work for the textfield tooltip...
+		$('#' + id).tipTip({ defaultPosition: 'right', keepAlive: true }); 
+		// The textfield tooltip
+		var textContent = [
+			'<p>Press enter to send a message</p>',
+			'<textarea id="textMessage"></textarea>'
+		];
+		$('#' + id).tipTip({ 
+			defaultPosition: 'bottom', 
+			activation: 'click', 
+			content: textContent.join(''), 
+			keepAlive: true
+		});
 	}
 	
 	function createSendTextFileTooltip(field, event) {
-
+		
 	}
 	
 	return {
@@ -85,8 +97,8 @@ Page = (function() {
 			
 			filepicker.setKey('AjB_5ggM9QMO_uSoMgHNmz');
 					
-			window.addEventListener("keypress", newData);
-			socket.on('response', newData);
+			// window.addEventListener("keypress", newData);
+			// socket.on('response', newData);
 			var status = document.getElementById('status');
 			var drop   = document.getElementById('drop');
 			var list   = document.getElementById('list');
