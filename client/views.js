@@ -95,6 +95,7 @@
 		this.color = colors.splice(Math.floor(Math.random() * colors.length), 1);
 		this.x = this.column * columnSize;
 		this.y = this.row * rowSize;
+		this.users = [];
 		
 		var html = groupTemplate.join('');
 		html = html.replace('{color}', this.color).replace('{id}', 'group-' + (groupIndex++)).replace('{groupName}', this.name);

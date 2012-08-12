@@ -32,6 +32,7 @@ User.prototype = {
 		console.log('blob', blob);
 		delete blob.id;
 		this.__socket.emit('response', {
+			sender: this.name,
 			success: true,
 			action: (type || 'broadcast'),
 			data: blob
