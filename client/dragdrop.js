@@ -71,16 +71,12 @@ Page = (function() {
 	function createUserTooltip(id) {
 		// The userlist tooltip
 		// This tooltip has to have keepAlive on as well, in order for it to work for the textfield tooltip...
-		$('#' + id).tipTip({ defaultPosition: 'right', keepAlive: true }); 
+		$('#' + id).tipTip({ defaultPosition: 'right' }); 
 		// The textfield tooltip
-		var textContent = [
-			'<p>Press enter to send a message</p>',
-			'<textarea id="textMessage"></textarea>'
-		];
+		
 		$('#' + id).tipTip({ 
 			defaultPosition: 'bottom', 
 			activation: 'click', 
-			content: textContent.join(''), 
 			keepAlive: true
 		});
 	}

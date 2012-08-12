@@ -152,7 +152,13 @@
 			dragCount -= 1;
 		});
 		this.el.on('click', function () {
-			console.log('clicked');
+			console.log('clicked');	
+			var textContent = [
+				'<p>Press enter to send a message</p>',
+				'<textarea id="textMessage"></textarea>'
+			];
+			$('#tiptip_content').append(textContent.join(''));
+			$('#textMessage').focus();
 			$(window).on('keydown', function (e) {
 				if (e.target.id === 'textMessage' && e.keyCode === 13) {
 					// Send message
