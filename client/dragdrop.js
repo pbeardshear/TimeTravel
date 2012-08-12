@@ -67,6 +67,7 @@ Page = (function() {
 	}
 	
 	return {
+		createUserTooltip: createUserTooltip,
 		attachFilepicker: attachFilepicker,
 		init: function() {
 			filepicker.setKey('AjB_5ggM9QMO_uSoMgHNmz');
