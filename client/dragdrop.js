@@ -1,21 +1,30 @@
 Page = (function() {
 
 	function newFileUploaded(data) {
-		var name;
-		var list = document.getElementById('list');
-		var newEl = document.createElement('a');
-		newEl.href = data.url;
+		data = data.data;
 		
-		var imgEl = document.createElement('img');
-		imgEl.src = "http://1.bp.blogspot.com/-ivx8sPkrN0E/T7oWeBCAwKI/AAAAAAAAAfw/aZoBDKIIB3o/s1600/File.png";
+		if (data.users) {
+			var name;
+			var list = document.getElementById('list');
+			var newEl = document.createElement('a');
+			newEl.href = data.url;
+			
+			var imgEl = document.createElement('img');
+			imgEl.src = "http://1.bp.blogspot.com/-ivx8sPkrN0E/T7oWeBCAwKI/AAAAAAAAAfw/aZoBDKIIB3o/s1600/File.png";
+			
+			var fileInfo = document.createElement('p');
+			fileInfo.innerHTML = 'File Name: ' + data.name + '<br>' + 'File Size: ' + data.size + '<br>' + 'File Type: ' + data.fileType;
+			
+			newEl.appendChild(imgEl);
+			newEl.appendChild(fileInfo);
+			
+			list.appendChild(newEl);
+		}
+		else {
+			//user alerting crap
+		}
 		
-		var fileInfo = document.createElement('p');
-		fileInfo.innerHTML = data
-		
-		newEl.appendChild(imgEl);
-		newEl.appendChild(fileInfo);
-		
-		list.appendChild(newEl);
+
 	}
 
 	return {
