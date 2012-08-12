@@ -92,7 +92,7 @@ io.sockets.on('connection', function (socket) {
 		// TEST
 		var request = https.request({
 			host: 'sendgrid.com',
-			path: '/api/mail.send.xml?api_user=youremail@domain.com&api_key=secureSecret&to=destination@example.com&toname=Destination&subject=Example%20Subject&text=testingtextbody&from=info@domain.com'
+			path: '/api/mail.send.xml?api_user=youremail@domain.com&api_key=secureSecret&to=destination@example.com&toname=Destination&subject=Example%20Subject&text=testingtextbody&from=info@domain.com',
 			method: 'POST'
 		});
 		

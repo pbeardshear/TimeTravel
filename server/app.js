@@ -55,14 +55,14 @@ BigRoom.prototype = {
 		console.log('broadcasting');
 		this.broadcast(user, {
 			name: name
-		});
+		}, 'users');
 	},
 	
-	broadcast: function (user, data) {
+	broadcast: function (user, data, type) {
 		var userList = data.users ? this.users.filter(function (user) { return data.users.indexOf(user.name) != -1; }) : this.users;
 		for (var i = 0; i < this.users.length; i++) {
 			if (this.users[i].id != user.id) {
-				this.users[i].send(data);
+				this.users[i].send(data, type);
 			}
 		}
 	}
