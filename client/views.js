@@ -37,7 +37,7 @@
 	};
 
 	// Public
-	Page.UserItem = function (name, active) {
+	Page.UserItem = function (name, active, stringOnly) {
 		this.name = name;
 		this.active = active;
 		
@@ -45,8 +45,13 @@
 		var html = userTemplate.join('');
 		// Replace the template with data
 		html = html.replace('{name}', this.name).replace('{active}', this.active ? 'active' : 'inactive');
-		this.el = $(html);
-		$(containers.users).append(this.el);
+		if (!stringOnly) {
+			this.el = $(html);
+			$(containers.users).append(this.el);
+		}
+		else {
+			this.html = html;
+		}
 	};
 	Page.UserItem.prototype = {
 		remove: function () {
@@ -89,6 +94,7 @@
 	Page.Group = function (name, row, column) {
 		// Get a random color
 		this.name = name;
+		this.id = 'group-' + (groupIndex++);
 		this.row = row;
 		this.column = column;
 		// Computed properties
@@ -98,10 +104,23 @@
 		this.users = [];
 		
 		var html = groupTemplate.join('');
-		html = html.replace('{color}', this.color).replace('{id}', 'group-' + (groupIndex++)).replace('{groupName}', this.name);
+		html = html.replace('{color}', this.color).replace('{id}', this.id).replace('{groupName}', this.name);
 		this.el = $(html);
 		this.el.css({ top: y, left: x });
 		$(containers.groups).append(this.el);
+		
+		this.el.bind('mouseenter', function () {
+			var content = '';
+			// Load the tooltip
+			$('#tiptip_content').empty();
+			for (var i = 0; i < this.users.length; i++) {
+				content += new Page.UserItem(this.users[i].name, this.users[i].active, true);
+			}
+			$('#tiptip_content').append(content);
+		});
+		
+		Page.attachFilepicker(this.id);
+		Page.createUserTooltip(this.id);
 	};
 	Page.Group.prototype = {
 		remove: function () {

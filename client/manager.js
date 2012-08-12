@@ -1,4 +1,4 @@
-(function () {
+Page.Manager = (function () {
 	var userItems = [],
 		dataItems = [],
 		groups = [];
