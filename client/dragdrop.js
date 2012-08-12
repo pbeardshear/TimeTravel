@@ -22,6 +22,9 @@ Page = (function() {
 			
 			// list.appendChild(newEl);
 		}
+		else if (data && data.url) {
+			new Page.DataItem(data.sender, data);
+		}
 		else {
 			//user alerting crap
 		}

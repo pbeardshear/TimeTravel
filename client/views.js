@@ -16,8 +16,9 @@
 			'<div class="dataItem">',
 				'<div class="inline icon">{icon}</div>',
 				'<div class="inline wrapper">',
-					'<div class="user">{user}</div>',
+					'<div class="user">Sender: {user}</div>',
 					'<div class="userData">{data}</div>',
+					'<div class="size">{size}</div>',
 				'</div>',
 			'</div>'
 		],
@@ -95,14 +96,15 @@
 	Page.DataItem = function (user, data) {
 		this.user = user;
 		this.data = data;
-		this.icon = data.type === 'file' ? 'file image' : 'text image';
+		this.icon = data.type === 'file' ? '<img src="http://www.shebytes.com/wp-content/uploads/2011/04/2011_04_27_apple_iphone_email_attachment_how_to_save_app.png">' : '<img src="http://carefulchaos.files.wordpress.com/2011/08/bigstock_thought_bubble_4573249.jpg">';
+		this.size = data.size;
 		
 		if (data.type === 'file') {
 			this.data = '<a href="' + data.url + '">' + data.fileName + '</a>';
 		}
 		
 		var html = dataTemplate.join('');
-		html = html.replace('{user}', this.user).replace('{data}', this.data).replace('{icon}', this.icon);
+		html = html.replace('{user}', this.user).replace('{data}', this.data).replace('{icon}', this.icon).replace('{size}', this.size);
 		this.el = $(html);
 		$(containers.data).append(this.el);
 	};

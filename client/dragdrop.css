@@ -1,11 +1,11 @@
-body { margin: 0px; }
+body { margin: 0px; font-family: arial;}
 #drop
 { width: 48%; height: 375px; color: gray; font-size: 3em; font-family: arial; text-align: center; vertical-align: middle; float: left; }	
 #list { float: left; width: 48%; height: 375px; border: 1px solid black; }
 #list a img, #list a p { font-family: helvetica; font-size: 14px; float: left; color: gray; }
 #drop, #list { margin-top: 45px; border: 3px dashed rgba(102, 102, 102, 0.24); border-radius: 10px; }
 #status { width: 1000px; height: 200px; border: 1px solid black; margin: auto; float: left; }
-img { width: 75px; height: 75px; }
+img { width: 1	75px; height: 75px; }
 #droptext { width: 100%; height: 100%; }
 
 #circleArea { width: 60%; height: 100%; margin: 0px auto; padding: 15px; }
@@ -16,6 +16,7 @@ img { width: 75px; height: 75px; }
 #addCircle { top: 0px; right: 20%; border: 1px solid #CCC; border-top: none; border-right: none; padding: 10px; }
 #options { bottom: 0px; left: 0px; }
 #container > div {margin-top: 20px;}
+.icon { float: left;}
 
 #maskInput {position: fixed; top: 45%; z-index: 5000; width: 100%; height: 300px; background-color: #026A8B}
 
