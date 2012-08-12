@@ -23,10 +23,17 @@ Page = (function() {
 	  }
 	};
 	
-	function newFileUploaded() {
-		document.getElementById('list');
-		var template = '<div class="fileImage">{0}</div>';
+	function newFileUploaded(data) {
+		var name;
+		var list = document.getElementById('list');
+		var newEl = document.createElement('div');
+		var imgEl = document.createElement('img');
+		imgEl.src = "http://1.bp.blogspot.com/-ivx8sPkrN0E/T7oWeBCAwKI/AAAAAAAAAfw/aZoBDKIIB3o/s1600/File.png";
+		var fileInfo = document.createElement('p');
+		newEl.appendChild(imgEl);
+		newEl.appendChild(fileInfo);
 		
+		list.appendChild(newEl);
 	}
 
 	return {
@@ -36,7 +43,10 @@ Page = (function() {
 				console.log(data);
 				socket.emit('my other event', { my: 'data' });
 			  });
-			
+			  socket.on('response', function (data) {
+				newFileUploaded(data);
+			  });
+			// window.addEventListener("keypress", newFileUploaded);
 			var status = document.getElementById('status');
 			var drop   = document.getElementById('drop');
 			var list   = document.getElementById('list');
@@ -73,6 +83,8 @@ Page = (function() {
 				reader.readAsDataURL(file);
 			  }
 			  
+			
+			  
 			addEventHandler(reader, 'loadend', function(e, file) {
 				var bin           = this.result; 
 				var newFile       = document.createElement('div');
@@ -83,7 +95,7 @@ Page = (function() {
 								 // ? 'Loaded 100% of file '+fileNumber+' of '+files.length+'...' 
 								 // : 'Done loading. processed '+fileNumber+' files.';
 				status.innerHTML = bin;
-				socket.emit('broadcast', {data: bin});
+				socket.emit('broadcast', {fileObject: file, data: bin});
 				var img = document.createElement("img"); 
 				img.file = file;   
 				img.src = bin;
