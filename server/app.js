@@ -47,7 +47,7 @@ BigRoom.prototype = {
 		user.room = this;
 		user.name = name;
 		// Give the new user the list of users in this room
-		user.send({ users: this.users, 'users');
+		user.send({ users: this.users, 'users' });
 		this.users.push(user);
 		// Broadcast the user joining to all other users in the room
 		this.broadcast(user, {
