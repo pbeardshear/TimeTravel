@@ -61,6 +61,7 @@ Page = (function() {
 	function setName() {
 		if (event.charCode == 13) {
 			name = $('#name').value;
+			popupName(name);
 			console.log(13);
 			$('#maskInput').hide();
 		}

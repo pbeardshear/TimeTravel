@@ -7,10 +7,11 @@
 	var userTemplate = [
 			'<div class="userItem" draggable="true">',
 				'<div class="inline activeCircle {active}"></div>',
-				'<div class="inline userName">',
+				'<div class="inline userName">	',
 					'<span>{name}</span>',
 				'</div>',
-			'</div>'
+			'</div>',
+			'<div class="separator"></div>'
 		],
 		dataTemplate = [
 			'<div class="dataItem">',
@@ -20,7 +21,8 @@
 					'<div class="userData">{data}</div>',
 					'<div class="size">{size}</div>',
 				'</div>',
-			'</div>'
+			'</div>',
+			'<div class="separator"></div>'
 		],
 		groupTemplate = [
 			'<div class="group {color}" id="{id}">',
