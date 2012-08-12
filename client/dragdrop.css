@@ -21,6 +21,7 @@ body { margin: 0px; font-family: arial;}
 
 
 .icon { float: left;}
+.icon img {margin-top: 8px;}
 .userItem { padding: 8px; height: 16px; }
 .userItem:hover { background-color: #DDD; }
 .userName { text-align: right; font-family: Verdana, sans-serif; font-size: 12px; margin-top: 1px; margin-left: 10px; color: #000; }

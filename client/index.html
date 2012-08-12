@@ -19,12 +19,22 @@
 		#container { width: 400px; margin: 150px auto; }
 		#request { width: 400px; height: 120px; font-size: 40px; font-family: Verdana, sans-serif; }
 		#logo { margin-left: 30px; }
+		#header {background: #b7deed; /* Old browsers */
+		background: -moz-linear-gradient(top, #b7deed 0%, #0086e0 4%, #4d42b2 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b7deed), color-stop(4%,#0086e0), color-stop(100%,#4d42b2)); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top, #b7deed 0%,#0086e0 4%,#4d42b2 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top, #b7deed 0%,#0086e0 4%,#4d42b2 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top, #b7deed 0%,#0086e0 4%,#4d42b2 100%); /* IE10+ */
+		background: linear-gradient(to bottom, #b7deed 0%,#0086e0 4%,#4d42b2 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b7deed', endColorstr='#4d42b2',GradientType=0 ); /* IE6-9 */}
+		
+		#header img {position: relative; top: -6px;}
 	</style>
 </head>
 <body>
-	<div id="header"><img src="/images/BubblesLogo.png" height="60" id="logo" /></div>
+	<div id="header"><img src="/images/BubblesLogo.png" height="80" id="logo" /></div>
 	<div id="container">
-		<button id="request">Request Server</button>
+		<button id="request">Share your files</button>
 	</div>
 </body>
 </html>
