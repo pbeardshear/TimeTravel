@@ -51,17 +51,7 @@ Page = (function() {
 	}
 	
 	function createUserTooltip(id) {
-		$('#status').tooltip({ 
-			track: true, 
-			delay: 0, 
-			showURL: false, 
-			opacity: 1, 
-			fixPNG: true, 
-			showBody: " - ", 
-			extraClass: "pretty fancy", 
-			top: -15, 
-			left: 5 
-		}); 
+		$('#status').tipTip(); 
 	}
 	
 	function createSendTextFileTooltip() {
