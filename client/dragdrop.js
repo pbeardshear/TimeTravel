@@ -3,7 +3,7 @@ Page = (function() {
 	function newFileUploaded(data) {
 		data = data.data;
 		
-		if (data.users) {
+		if (data && data.users) {
 			var name;
 			var list = document.getElementById('list');
 			var newEl = document.createElement('a');
