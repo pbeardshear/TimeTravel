@@ -43,6 +43,11 @@ io.sockets.on('connection', function (socket) {
 		cb && cb();
 	});
 	
+	socket.on('disconnect', function () {
+		// User disconnected
+		console.log('disconnected');
+	});
+	
 	socket.on('join', function (req) {
 		console.log('joining', req);
 		var user = getConnection(req.id),

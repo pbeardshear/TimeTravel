@@ -58,11 +58,12 @@ Page = (function() {
 	});
 	}
 	
-	function setName() {
-		if (event.charCode == 13) {
+	function setName(self, e) {
+		if (e.keyCode == 13) {
 			name = $('#name').value;
-			popupName(name);
-			console.log(13);
+			localStorage.setItem('__name', $('#name').val());
+			// Send a join request to the server
+			
 			$('#maskInput').hide();
 		}
 	}
@@ -94,10 +95,10 @@ Page = (function() {
 		attachFilepicker: attachFilepicker,
 		setName: setName,
 		init: function() {
-			var maskInput = document.createElement('div');
-			maskInput.id = 'maskInput';
-			maskInput.innerHTML = 'Welcome to your room! What\'s your name?<textarea id="name" onkeypress="Page.setName(this, event)"></textarea>';
-			document.body.appendChild(maskInput);
+			// var maskInput = document.createElement('div');
+			// maskInput.id = 'maskInput';
+			// maskInput.innerHTML = 'Welcome to your room! What\'s your name?<input id="name" placeholder="My name is..." onkeypress="Page.setName(this, event)"></input>';
+			// document.body.appendChild(maskInput);
 			
 			filepicker.setKey('AjB_5ggM9QMO_uSoMgHNmz');
 					

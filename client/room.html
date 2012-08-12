@@ -12,10 +12,19 @@
 	<script type="text/javascript" src="/manager.js"></script>
 	<script>
 		function popupName(callback) {
-			// DEBUG
-			localStorage.setItem('__name', 'Peter');
-			callback();
-			// END DEBUG
+			var textField = $('#name'),
+				container = $('#nameEntry');
+				
+			function keyHandler(e) {
+				if (e.keyCode === 13) {
+					localStorage.setItem('__name', textField.val());
+					container.hide();
+					callback();
+				}
+			}
+			
+			textField.on('keydown', keyHandler);
+			container.show();
 		}
 		
 		$(function () {
@@ -54,7 +63,12 @@
 			<button id="createGroup">Create Group</button>
 		</div>
 		<div class="floating" id="options">
-			
+		</div>
+		<div class="floating hidden" id="nameEntry">
+			<div class="centerWrapper">
+				<h4>Welcome to your room!<small>What's your name?</small></h4>
+				<input type="text" placeholder="My name is..." id="name" />
+			</div>
 		</div>
 	</div>
 </body>

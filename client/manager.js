@@ -13,7 +13,7 @@ Page.Manager = (function () {
 			switch (data.action) {
 				case 'users':
 					for (var i = 0; i < data.users.length; i++) {
-						userItems.push(new Page.UserItem(data.users[i], true));
+						userItems.push(new Page.UserItem(data.data.users[i], true));
 					}
 					break;
 				case 'broadcast':
